@@ -203,8 +203,14 @@ class SDLJoystickHandler_API16 extends SDLJoystickHandler {
                         }
                     }
 
-                    mJoysticks.add(joystick);
-                    SDLControllerManager.nativeAddJoystick(joystick.device_id, joystick.name, joystick.desc, getVendorId(joystickDevice), getProductId(joystickDevice), false, getButtonMask(joystickDevice), joystick.axes.size(), joystick.hats.size()/2, 0);
+                    if ((getVendorId(joystickDevice) != 0) && (getProductId(joystickDevice) != 0))
+                    {
+                        if (joystick.axes.size() != 0)
+                        {
+                            mJoysticks.add(joystick);
+                            SDLControllerManager.nativeAddJoystick(joystick.device_id, joystick.name, joystick.desc, getVendorId(joystickDevice), getProductId(joystickDevice), false, getButtonMask(joystickDevice), joystick.axes.size(), joystick.hats.size()/2, 0);
+                        }
+                    }
                 }
             }
         }
