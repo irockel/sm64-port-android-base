@@ -1,7 +1,12 @@
-# sm64ex nightly branch Android Port
+# Fork of VDavid003's sm64ex nightly branch Android Port
 This is a port of the reconstructed Super Mario 64 source code to Android using SDL2 with OpenGL ES 2.0.
 
 It has cross-platform Touch Controls, Audio works, it saves the game to the app's internal storage and you can play it with an external keyboard or controller as well (tested on PS3 controller).
+
+---
+** Note **
+This fork adds an app icon, goes fully immersive and fixes an issue with correctly identifying the first real controller by filtering any facade controller which might be identified. To do a build with the improved n64 textures from the Render 96 project, removed touch controls and activated better camera see below.
+---
 
 # Build instructions
 
@@ -87,7 +92,7 @@ gradlew.bat assembleDebug
 
 **Clone the repository:**
 ```sh
-git clone --recursive https://github.com/VDavid003/sm64-port-android-base --branch sm64ex_nightly
+git clone --recursive https://github.com/irockel/sm64-port-android-base --branch sm64ex_nightly
 ```
 
 **Create the build image:**
@@ -155,3 +160,29 @@ cd ../../..
 **Continue with the normal instructions and build the game.**
 
 **Follow the instructions for EXTERNAL_DATA**
+
+## Build with improved n64 Textures, No Touch Controls, Better Camera on Linux
+
+* Build according Linux instructions above.
+* Apply the render96_android.patch and 60fpx_ex.patch (see above)
+* Apply n64 textures from Render 96 project by downloading zip from here:
+  https://github.com/pokeheadroom/RENDER96-HD-TEXTURE-PACK/tree/N64-Downscaled-Render96
+  and copying everything inside the "gfx" folder inside the zip into app/jni/src
+* Remove any in-fixes the files inside the app/jni/src/textures/skyboxes.
+* Remove any images in app/jni/src/levels/ending beside the cake.png
+* Build native code
+```sh
+cd app/jni/src
+TOUCH_CONTROLS=0 NODRAWINGDISTANCE=1 BETTERCAMERA=1 make --jobs 4
+TOUCH_CONTROLS=0 NODRAWINGDISTANCE=1 BETTERCAMERA=1 make --jobs 4
+cd ../../..
+```
+(for some strange reason this has to be done twice)
+* Do the apk build, don't forget the flags
+```sh
+cd app/jni/src
+TOUCH_CONTROLS=0 NODRAWINGDISTANCE=1 BETTERCAMERA=1 ./gradlew assembleDebug
+cd ../../..
+```
+* After this the instable apk resides in app/build/outputs/apk/debug/
+
