@@ -162,7 +162,22 @@ cd ../../..
 
 ## Build with improved n64 Textures, No Touch Controls, Better Camera on Linux
 
-Build according Linux instructions above.
+Prepare according Linux instructions above (up to doing the native build).
+
+Configure local.properties in the root folder like this
+
+```sh
+## This file must *NOT* be checked into Version Control Systems,
+# as it contains information specific to your local configuration.
+#
+# Location of the SDK. This is only used by Gradle.
+# For customization when using a Version Control System, please read the
+# header note.
+#Sat Mar 27 22:06:22 CET 2021
+sdk.dir=/path/to/Android/Sdk
+ndk.dir=/path/to/Android/Sdk/ndk/21.3.6528147
+```
+Maybe you need to download the fitting NDK, the mentioned version is known to work.
 
 Apply the render96_android.patch and 60fpx_ex.patch (see above).
 
@@ -170,7 +185,7 @@ Apply n64 textures from Render 96 project by downloading zip from here:
   https://github.com/pokeheadroom/RENDER96-HD-TEXTURE-PACK/tree/N64-Downscaled-Render96
 and copy everything inside the "gfx" folder inside the zip into app/jni/src.
 
-Remove any in-fixes the files inside the app/jni/src/textures/skyboxes.
+Remove any in-fixes the files inside the app/jni/src/textures/skyboxes, remove any ".rgba16".
 
 Remove any images in app/jni/src/levels/ending beside the cake.png.
 

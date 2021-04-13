@@ -4,3 +4,4 @@ app/jni/SDL/src
 app/build
 app/.externalNativeBuild
 .idea
+local.properties
