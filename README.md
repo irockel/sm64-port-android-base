@@ -181,7 +181,7 @@ Maybe you need to download the fitting NDK, the mentioned version is known to wo
 
 Apply the render96_android.patch and 60fpx_ex.patch (see above).
 
-Apply n64 textures from Render 96 project by downloading zip from here:
+Apply n64 textures from [Render 96](https://linktr.ee/Render96) project by downloading zip from here:
   https://github.com/pokeheadroom/RENDER96-HD-TEXTURE-PACK/tree/N64-Downscaled-Render96
 and copy everything inside the "gfx" folder inside the zip into app/jni/src.
 
