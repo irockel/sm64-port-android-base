@@ -163,12 +163,17 @@ cd ../../..
 ## Build with improved n64 Textures, No Touch Controls, Better Camera on Linux
 
 Build according Linux instructions above.
+
 Apply the render96_android.patch and 60fpx_ex.patch (see above)
+
 Apply n64 textures from Render 96 project by downloading zip from here:
   https://github.com/pokeheadroom/RENDER96-HD-TEXTURE-PACK/tree/N64-Downscaled-Render96
 and copy everything inside the "gfx" folder inside the zip into app/jni/src
+
 Remove any in-fixes the files inside the app/jni/src/textures/skyboxes.
+
 Remove any images in app/jni/src/levels/ending beside the cake.png
+
 Build native code
 ```sh
 cd app/jni/src
@@ -177,11 +182,13 @@ TOUCH_CONTROLS=0 NODRAWINGDISTANCE=1 BETTERCAMERA=1 make --jobs 4
 cd ../../..
 ```
 (for some strange reason this has to be done twice)
+
 Do the apk build, don't forget the flags
 ```sh
 cd app/jni/src
 TOUCH_CONTROLS=0 NODRAWINGDISTANCE=1 BETTERCAMERA=1 ./gradlew assembleDebug
 cd ../../..
 ```
-after this the installable apk resides in app/build/outputs/apk/debug/
+
+After this the installable apk resides in app/build/outputs/apk/debug/
 
