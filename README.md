@@ -3,10 +3,8 @@ This is a port of the reconstructed Super Mario 64 source code to Android using 
 
 It has cross-platform Touch Controls, Audio works, it saves the game to the app's internal storage and you can play it with an external keyboard or controller as well (tested on PS3 controller).
 
----
-** Note **
-This fork adds an app icon, goes fully immersive and fixes an issue with correctly identifying the first real controller by filtering any facade controller which might be identified. To do a build with the improved n64 textures from the Render 96 project, removed touch controls and activated better camera see below.
----
+> ** Note **
+> This fork adds an app icon, goes fully immersive and fixes an issue with correctly identifying the first real controller by filtering any facade controller which might be identified. To do a build with the improved n64 textures from the Render 96 project, removed touch controls and activated better camera see below.
 
 # Build instructions
 
