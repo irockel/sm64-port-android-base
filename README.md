@@ -5,7 +5,7 @@ It has cross-platform Touch Controls, Audio works, it saves the game to the app'
 
 > **Note**
 > 
-> This fork adds an app icon, goes fully immersive and fixes an issue with correctly identifying the first real controller by filtering any facade controller which might be identified. To do a build with the improved n64 textures from the Render 96 project, removed touch controls and activated better camera see below.
+> This fork adds an app icon, goes fully immersive and fixes an issue with correctly identifying the first real controller by filtering any facade controller which might be identified. To do a build with the improved n64 textures from the Render 96 project, removed touch controls and activated better camera see instructions at the end of this README.
 
 # Build instructions
 
