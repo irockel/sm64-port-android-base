@@ -273,6 +273,38 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
                 SDLActivity.onNativeDropFile(filename);
             }
         }
+
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT >= 19) {
+            hideSystemUI();
+
+            View decorView = getWindow().getDecorView();
+            decorView.setOnSystemUiVisibilityChangeListener
+                    (new View.OnSystemUiVisibilityChangeListener() {
+                        @Override
+                        public void onSystemUiVisibilityChange(int visibility) {
+                            hideSystemUI();
+                        }
+                    });
+        }
+
+    }
+
+    private void hideSystemUI() {
+        // Enables regular immersive mode.
+        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
+        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                // Set the content to appear under the system bars so that the
+                // content doesn't resize when the system bars hide and show.
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                // Hide the nav bar and status bar
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 
     protected void pauseNativeThread() {
@@ -380,6 +412,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
 
         mHasFocus = hasFocus;
         if (hasFocus) {
+            hideSystemUI();
            mNextNativeState = NativeState.RESUMED;
            SDLActivity.getMotionListener().reclaimRelativeMouseModeIfNeeded();
 
@@ -611,14 +644,14 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
                                         View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
                                         View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.INVISIBLE;
                             window.getDecorView().setSystemUiVisibility(flags);
-                            window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                            window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+                            //window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                            //window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
                             SDLActivity.mFullscreenModeActive = true;
                         } else {
                             int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_VISIBLE;
                             window.getDecorView().setSystemUiVisibility(flags);
-                            window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-                            window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                            //window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+                            //window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
                             SDLActivity.mFullscreenModeActive = false;
                         }
                     }
